@@ -12,7 +12,7 @@ services:
     network_mode: host
   ha-support-service:
     container_name: ha-support-service
-    build: ../ha-tv-service
+    build: ../ha-support-service
     environment:
       - HOST_URL=/ha-support
     volumes:
