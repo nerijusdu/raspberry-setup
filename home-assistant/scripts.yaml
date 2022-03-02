@@ -1,0 +1,86 @@
+play_channel:
+  alias: Play LRT
+  sequence:
+  - service: homeassistant.update_entity
+    data: {}
+    target:
+      entity_id: sensor.lrt_stream_url
+  - service: media_player.play_media
+    target:
+      entity_id: media_player.living_room_tv
+    data:
+      media_content_type: application/vnd.apple.mpegurl
+      media_content_id: '{{ states(''sensor.lrt_stream_url'') }}'
+  mode: single
+  icon: mdi:television-classic
+stop_casting:
+  alias: Stop casting
+  sequence:
+  - service: media_player.turn_off
+    data: {}
+    target:
+      device_id: 151749efd4f11272e9d013e1a23f7fcc
+  mode: single
+  icon: mdi:television-classic-off
+play_lnk:
+  alias: Play LNK
+  sequence:
+  - service: homeassistant.update_entity
+    data: {}
+    target:
+      entity_id: sensor.lnk_stream_url
+  - service: media_player.play_media
+    target:
+      entity_id: media_player.living_room_tv
+    data:
+      media_content_type: application/vnd.apple.mpegurl
+      media_content_id: '{{ states(''sensor.lnk_stream_url'') }}'
+  mode: single
+  icon: mdi:television-classic
+test:
+  alias: Test
+  sequence:
+  - service: media_player.play_media
+    data:
+      media_content_id: https://lrthd.lrt.lt/secure/lrt_hd/hls/nOZBTJqODkJz5dWwCgWHUg/1645998442/lrt_televizija_540p/index.m3u8
+      media_content_type: application/vnd.apple.mpegurl
+    target:
+      entity_id: media_player.living_room_tv
+  mode: single
+add_clean_vacuum_task:
+  sequence:
+  - service: habitica.api_call
+    data:
+      name: nenerijus
+      path:
+      - tasks
+      - user
+      - post
+      args:
+        text: Clean the vacuum
+        type: todo
+        priority: 0.1
+  mode: single
+  alias: Add clean vacuum task
+  icon: mdi:robot-vacuum
+confirm_gym:
+  alias: Confirm gym
+  use_blueprint:
+    path: homeassistant/confirmable_notification.yaml
+    input:
+      notify_device: 8c735a81c4245972e6cbae1f2d6801dc
+      title: Are you going to workout?
+      confirm_text: 'Yes'
+      dismiss_text: 'No'
+      confirm_action:
+      - service: habitica.api_call
+        data:
+          name: nenerijus
+          path:
+          - tasks
+          - a0f6f791-a7a2-49b7-a236-22008eec3d44
+          - score
+          - up
+          - post
+      message: You're in the gym zone
+  icon: mdi:weight-lifter

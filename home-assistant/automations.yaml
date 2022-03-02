@@ -1,0 +1,48 @@
+- id: '1645989534170'
+  alias: Clean vacuum when done
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 5da4eed782b5c5f9eba91df320e575df
+    domain: vacuum
+    entity_id: vacuum.viomi_v8_ba0a_robot_cleaner
+    type: docked
+  condition: []
+  action:
+  - service: script.add_clean_vacuum_task
+    data: {}
+  mode: single
+- id: '1645995352794'
+  alias: Habitica steps update
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.daily_steps
+    above: '5000'
+  condition: []
+  action:
+  - service: habitica.api_call
+    data:
+      name: nenerijus
+      path:
+      - tasks
+      - 56665b0a-424f-4f59-89d5-56be96e10869
+      - score
+      - up
+      - post
+  mode: single
+- id: '1645996799946'
+  alias: Went to the gym
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 8c735a81c4245972e6cbae1f2d6801dc
+    domain: device_tracker
+    entity_id: device_tracker.samsung_s20fe
+    type: enters
+    zone: zone.gym
+  condition: []
+  action:
+  - service: script.confirm_gym
+    data: {}
+  mode: single

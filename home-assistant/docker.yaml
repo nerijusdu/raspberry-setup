@@ -1,0 +1,15 @@
+- name: Docker
+  containers: 
+    - home-assistant
+    - ha-support-service
+    - nginx
+  rename:
+    home-assistant: "Home Assistant"
+    ha-support-service: "HA Support Service"
+    nginx: "Nginx"
+  monitored_conditions:
+    - version
+    - containers_running
+    - state
+    - status
+    - memory

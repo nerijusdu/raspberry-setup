@@ -1,0 +1,23 @@
+- platform: systemmonitor
+  resources:
+    - type: disk_use
+      arg: /
+    - type: disk_free
+      arg: /
+    - type: memory_use_percent
+    - type: ipv4_address
+      arg: wlan0
+    - type: processor_use
+    - type: processor_temperature
+    - type: last_boot
+
+- platform: rest
+  resource: "http://localhost:3000/api/channel/lrt"
+  scan_interval: 86400
+  name: "LRT Stream URL"
+  value_template: "{{ value_json.streamUrl }}"
+- platform: rest
+  resource: "http://localhost:3000/api/channel/lnk"
+  scan_interval: 86400
+  name: "LNK Stream URL"
+  value_template: "{{ value_json.streamUrl }}"

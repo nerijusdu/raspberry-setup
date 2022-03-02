@@ -1,0 +1,27 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+http:
+  use_x_forwarded_for: true
+  trusted_proxies: 
+    - 127.0.0.1
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+frontend:
+  themes: !include_dir_merge_named themes
+
+utility_meter:
+  steps:
+    name: Daily steps
+    source: sensor.samsung_s20fe_steps_sensor
+    cycle: daily
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+sensor: !include sensor.yaml
+monitor_docker: !include docker.yaml
