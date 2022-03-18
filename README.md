@@ -7,6 +7,7 @@ This repository contains configuration files for home assitant and nginx. This s
 - Clone [ha-support-service](https://github.com/nerijusdu/ha-support-service) to `~/projects/ha-support-service`
 - Setup home assistant to `~/projects/home-assistant` directory
   - Copy files from this repositories `home-assistant` directory to `~/projects/home-assistant`
+  - Replace `TODO-YOUR-PUBLIC-DOMAIN` with your domain (e.g. example.org)
   - Run `docker-compose up -d`
 - Copy files from this repositories `nginx` directory to `~/projects/nginx`
   - Replace `TODO-YOUR-PUBLIC-DOMAIN` with your domain (e.g. example.org)

@@ -20,8 +20,17 @@ utility_meter:
     source: sensor.samsung_s20fe_steps_sensor
     cycle: daily
 
+template:
+  - sensor:
+    - name: "Strava YTD distance"
+      unit_of_measurement: "km"
+      state: "{{ states('sensor.strava_stats_summary_ytd_ride_distance').split(' ')[0] | float }}"
+
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
 sensor: !include sensor.yaml
 monitor_docker: !include docker.yaml
+
+homeassistant:
+  external_url: "https://TODO-YOUR-PUBLIC-DOMAIN"
